@@ -1,9 +1,12 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
+import {AppComponent} from './app.component';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSliderModule} from '@angular/material/slider';
+import {NgxPermissionsGuard, NgxPermissionsModule} from 'ngx-permissions';
+import {RouterModule} from "@angular/router";
+
 
 @NgModule({
   declarations: [
@@ -12,9 +15,27 @@ import { MatSliderModule } from '@angular/material/slider';
   imports: [
     BrowserModule,
     NoopAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    RouterModule.forRoot([
+      {
+        path: 'auth',
+        loadChildren: () => import('./components/auth/auth.module').then((m) => m.AuthModule)
+      },
+      {
+        path: '',
+        loadChildren: () => import('./components/pages/pages.module').then((m) => m.PagesModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          redirectTo: 'auth',
+          only: ['Admin', 'User'],
+        }
+
+      }
+    ]),
+    NgxPermissionsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

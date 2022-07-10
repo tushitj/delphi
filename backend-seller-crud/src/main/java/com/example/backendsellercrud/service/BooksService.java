@@ -12,14 +12,20 @@ import java.util.List;
 @Service
 public class BooksService {
 
+    @Autowired
+    private BooksRepository _booksRepository;
 
+    public List<Book> fetchAllBooks() {
+        List<Book> result = new ArrayList<>();
+        _booksRepository.findAll().forEach(result::add);
+        return result;
+    }
 
-    public List<Book> fetchAllBooks(){
-        Book book = new Book();
-        book.setId(1);
-        book.setName("book-1");
-        List<Book> list = new ArrayList<>();
-        list.add(book);
-        return list;
+    public Book createOrUpdateBook(Book book) {
+        return _booksRepository.save(book);
+    }
+
+    public Book getBookById(int id) {
+        return _booksRepository.findById(id).orElse(null);
     }
 }
