@@ -23,9 +23,9 @@ public class BackendSellerCrudApplication {
         return () -> {
             repository.save(new Book(1, "book-1", 100, "English"));
             repository.save(new Book(2, "book-2", 200, "Hindi"));
-            repository.save(new Book(2, "book-3", 300, "French"));
-            repository.save(new Book(2, "book-4", 400, "Spanish"));
-            repository.save(new Book(2, "book-5", 500, "German"));
+            repository.save(new Book(3, "book-3", 300, "French"));
+            repository.save(new Book(4, "book-4", 400, "Spanish"));
+            repository.save(new Book(5, "book-5", 500, "German"));
         };
     }
 }

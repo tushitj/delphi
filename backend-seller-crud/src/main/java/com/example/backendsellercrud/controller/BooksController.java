@@ -39,7 +39,7 @@ public class BooksController {
         return _bookService.createOrUpdateBook(book);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteBookById(@PathVariable int id) {
         _bookService.deleteById(id);
     }
