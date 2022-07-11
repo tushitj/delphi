@@ -6,6 +6,9 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
 import {NgxPermissionsGuard, NgxPermissionsModule} from 'ngx-permissions';
 import {RouterModule} from "@angular/router";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {InterceptorService} from "./core/interceptor/interceptor.service";
+import {BooksService} from "./core/services/books.service";
 
 
 @NgModule({
@@ -16,6 +19,7 @@ import {RouterModule} from "@angular/router";
     BrowserModule,
     NoopAnimationsModule,
     MatSliderModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {
         path: 'auth',
@@ -24,17 +28,17 @@ import {RouterModule} from "@angular/router";
       {
         path: '',
         loadChildren: () => import('./components/pages/pages.module').then((m) => m.PagesModule),
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          redirectTo: 'auth',
-          only: ['Admin', 'User'],
-        }
+        // canActivate: [NgxPermissionsGuard],
+        // data: {
+        //   redirectTo: 'auth',
+        //   only: ['Admin', 'User'],
+        // }
 
       }
     ]),
     NgxPermissionsModule.forRoot()
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true}, BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

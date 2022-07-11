@@ -28,4 +28,8 @@ public class BooksService {
     public Book getBookById(int id) {
         return _booksRepository.findById(id).orElse(null);
     }
+
+    public void deleteById(int id) {
+        _booksRepository.deleteById(id);
+    }
 }

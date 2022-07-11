@@ -1,0 +1,32 @@
+
+<form [formGroup]="bookForm">
+  <ol>
+<!--    <li>-->
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>Id</mat-label>-->
+<!--        <input matInput>-->
+<!--      </mat-form-field>-->
+<!--    </li>-->
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </li>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
+      </mat-form-field>
+    </li>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Language</mat-label>
+        <input matInput formControlName="language">
+      </mat-form-field>
+    </li>
+      <button mat-raised-button (click)="onNoClick()">Cancel</button>
+
+      <button mat-raised-button [disabled]="bookForm.invalid" (click)="update()">Update</button>
+  </ol>
+</form>

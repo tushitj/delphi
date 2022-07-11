@@ -4,7 +4,6 @@ import com.example.backendsellercrud.model.Book;
 import com.example.backendsellercrud.repository.BooksRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +21,8 @@ public class BackendSellerCrudApplication {
     @Bean
     InitializingBean sendDatabase() {
         return () -> {
-            repository.save(new Book(1,"book-1"));
-            repository.save(new Book(2,"book-3"));
+            repository.save(new Book(1, "book-1", 100, "abc"));
+            repository.save(new Book(2, "book-3", 200, "abc"));
         };
     }
 }

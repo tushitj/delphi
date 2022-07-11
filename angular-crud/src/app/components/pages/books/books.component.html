@@ -1,0 +1,80 @@
+<div>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Book Name</mat-label>
+      <input [(ngModel)]="newBook.name" matInput placeholder="Ex. BookABC">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Book Price</mat-label>
+      <input [(ngModel)]="newBook.price" matInput placeholder="Ex. $100">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Book Language</mat-label>
+      <input [(ngModel)]="newBook.language" matInput placeholder="Ex. English">
+    </mat-form-field>
+  <button style="margin-left: 50px;" (click)="createBook(newBook)" color="primary" mat-raised-button>Add Book</button>
+</div>
+<mat-divider></mat-divider>
+<div>
+<table [dataSource]="dataSource" class="mat-elevation-z8 w-100" mat-table>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell> Id</th>
+    <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th *matHeaderCellDef mat-header-cell> Name</th>
+    <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="price">
+    <th *matHeaderCellDef mat-header-cell> Price</th>
+    <td *matCellDef="let element" mat-cell> {{element.price | currency}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="language">
+    <th *matHeaderCellDef mat-header-cell> language</th>
+    <td *matCellDef="let element" mat-cell> {{element.language}} </td>
+  </ng-container>
+
+  <!-- actions Column -->
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell> Action</th>
+    <td *matCellDef="let element" mat-cell>
+      <button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)='editDialog(element)' mat-menu-item>
+          <mat-icon>mode_edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button (click)="delete(element)" mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>delete</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <mat-form-field apparence="legacy">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="newBook.name" class="form-control" id="name" matInput name="name" required type="text">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field apparence="legacy">
+    <mat-label>Price</mat-label>
+    <input [(ngModel)]="newBook.price" class="form-control" id="price" matInput name="price" pattern="[0-9]+"
+           required type="text">
+  </mat-form-field>
+  <br>
+  <button (click)="createBook(newBook)" color="primary" mat-raised-button>submit</button>
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>
+</div>

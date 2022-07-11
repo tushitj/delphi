@@ -1,0 +1,16 @@
+main {
+  border: 1px solid;
+  display: grid;
+  grid-template-columns: minmax(200px, 500px) minmax(400px, 500px) minmax(200px, 300px);
+  grid-gap: 20px;
+}
+
+main>div {
+  background: white;
+  text-align: center;
+  padding: 1em;
+}
+
+.div-B {
+  grid-column: 2;
+}

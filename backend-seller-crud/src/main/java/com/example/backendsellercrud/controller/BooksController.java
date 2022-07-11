@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/books")
 public class BooksController {
 
     @Autowired
@@ -29,15 +30,17 @@ public class BooksController {
 
 
     @PostMapping
-    public Book saveBook(@RequestBody Book book)
-    {
+    public Book saveBook(@RequestBody Book book) {
         return _bookService.createOrUpdateBook(book);
     }
 
     @PutMapping
-    public Book updateBook(@RequestBody Book book)
-    {
+    public Book updateBook(@RequestBody Book book) {
         return _bookService.createOrUpdateBook(book);
     }
 
+    @DeleteMapping
+    public void deleteBookById(@PathVariable int id) {
+        _bookService.deleteById(id);
+    }
 }
